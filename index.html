@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Central de Chamados</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <h1>Central de Chamados</h1>
+      <p>Fila de atendimento com prioridade e prazo de SLA. Os dados ficam só no seu navegador.</p>
+    </div>
+    <div class="acoes-topo">
+      <button id="exemplos" type="button">Carregar exemplos</button>
+      <button id="limpar" type="button" class="perigo">Apagar tudo</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="indicadores" aria-label="Indicadores">
+      <div class="kpi"><span id="kpi-abertos">0</span><small>em aberto</small></div>
+      <div class="kpi alerta"><span id="kpi-estourados">0</span><small>com SLA estourado</small></div>
+      <div class="kpi"><span id="kpi-resolvidos">0</span><small>resolvidos</small></div>
+      <div class="kpi"><span id="kpi-sla">–</span><small>resolvidos no prazo</small></div>
+    </section>
+
+    <div class="colunas">
+      <section class="painel">
+        <h2>Abrir chamado</h2>
+        <form id="form">
+          <label>Resumo do problema
+            <input name="titulo" required maxlength="80" placeholder="Ex.: Impressora do faturamento não imprime">
+          </label>
+          <label>Solicitante
+            <input name="solicitante" required maxlength="40" placeholder="Nome de quem pediu">
+          </label>
+          <div class="duas">
+            <label>Área
+              <select name="area">
+                <option>Produção</option><option>Logística</option><option>Financeiro</option>
+                <option>RH</option><option>Comercial</option><option>TI</option>
+              </select>
+            </label>
+            <label>Categoria
+              <select name="categoria">
+                <option>Acesso e senha</option><option>Hardware</option><option>Software</option>
+                <option>Rede</option><option>Impressora</option>
+              </select>
+            </label>
+          </div>
+          <label>Prioridade
+            <select name="prioridade" id="prioridade"></select>
+          </label>
+          <button type="submit" class="primario">Abrir chamado</button>
+        </form>
+
+        <h2>Chamados por categoria</h2>
+        <div id="por-categoria" class="barras"></div>
+      </section>
+
+      <section class="painel">
+        <div class="cabecalho-fila">
+          <h2>Fila</h2>
+          <div class="filtros">
+            <input id="busca" type="search" placeholder="Buscar">
+            <select id="filtro-status">
+              <option value="pendentes">Em aberto</option>
+              <option value="Resolvido">Resolvidos</option>
+              <option value="todos">Todos</option>
+            </select>
+          </div>
+        </div>
+        <ul id="fila" class="fila"></ul>
+        <p id="vazio" class="vazio" hidden>Nenhum chamado aqui. Abra um ou carregue os exemplos.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    Projeto de estudo de <a href="https://eguiedson.github.io">Eguiedson Cardoso Filho</a> ·
+    <a href="https://github.com/Eguiedson/central-de-chamados">código</a>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

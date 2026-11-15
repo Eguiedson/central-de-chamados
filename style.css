@@ -1,0 +1,69 @@
+:root {
+  --fundo: #f4f6f9; --superficie: #fff; --texto: #1b2330; --suave: #5a6576; --borda: #e1e6ed;
+  --destaque: #0f6cbd; --ok: #1a7f37; --atencao: #b26a00; --estourado: #c62828;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #10141a; --superficie: #171c24; --texto: #e7ebf0; --suave: #9aa5b4; --borda: #273041;
+    --destaque: #4ea1f0; --ok: #4cc26b; --atencao: #f0a840; --estourado: #ff6b6b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fundo); color: var(--texto); font: 15px/1.5 "Segoe UI", system-ui, sans-serif; }
+a { color: var(--destaque); }
+h1 { margin: 0; font-size: 1.5rem; }
+h2 { font-size: 1.05rem; margin: 0 0 12px; }
+button, input, select { font: inherit; color: inherit; }
+button { border: 1px solid var(--borda); background: var(--superficie); border-radius: 8px; padding: 6px 12px; cursor: pointer; }
+button:hover { border-color: var(--destaque); }
+button.primario { background: var(--destaque); border-color: var(--destaque); color: #fff; }
+button.perigo { color: var(--estourado); }
+input, select { width: 100%; padding: 8px; border: 1px solid var(--borda); border-radius: 8px; background: var(--fundo); }
+
+.topo { max-width: 1100px; margin: 0 auto; padding: 24px 16px 8px; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.topo p { margin: 4px 0 0; color: var(--suave); }
+.acoes-topo { display: flex; gap: 8px; }
+main { max-width: 1100px; margin: 0 auto; padding: 8px 16px 24px; }
+
+.indicadores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.kpi { background: var(--superficie); border: 1px solid var(--borda); border-radius: 12px; padding: 14px 16px; }
+.kpi span { display: block; font-size: 1.8rem; font-weight: 700; line-height: 1.1; }
+.kpi small { color: var(--suave); }
+.kpi.alerta span { color: var(--estourado); }
+
+.colunas { display: grid; grid-template-columns: 340px 1fr; gap: 16px; align-items: start; }
+.painel { background: var(--superficie); border: 1px solid var(--borda); border-radius: 12px; padding: 18px; }
+form { display: grid; gap: 10px; margin-bottom: 24px; }
+label { display: grid; gap: 4px; font-size: .9rem; color: var(--suave); }
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.barras { display: grid; gap: 8px; }
+.barra { display: grid; grid-template-columns: 110px 1fr 24px; gap: 8px; align-items: center; font-size: .88rem; }
+.barra div { background: var(--fundo); border-radius: 4px; height: 10px; overflow: hidden; }
+.barra i { display: block; height: 100%; background: var(--destaque); border-radius: 4px; }
+.barra b { text-align: right; }
+
+.cabecalho-fila { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.cabecalho-fila h2 { margin: 0; }
+.filtros { display: flex; gap: 8px; }
+.filtros input { width: 160px; }
+.filtros select { width: auto; }
+
+.fila { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.chamado { border: 1px solid var(--borda); border-left: 4px solid var(--ok); border-radius: 8px; padding: 10px 12px; }
+.chamado.atencao { border-left-color: var(--atencao); }
+.chamado.estourado { border-left-color: var(--estourado); }
+.linha2 { color: var(--suave); font-size: .88rem; }
+.linha3 { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.botoes { display: flex; gap: 6px; }
+.sla { font-size: .85rem; font-weight: 600; }
+.sla.ok { color: var(--ok); } .sla.atencao { color: var(--atencao); } .sla.estourado { color: var(--estourado); }
+.prio { font-size: .75rem; font-weight: 700; padding: 1px 6px; border-radius: 4px; border: 1px solid currentColor; }
+.prio.P1 { color: var(--estourado); } .prio.P2 { color: var(--atencao); } .prio.P3 { color: var(--destaque); } .prio.P4 { color: var(--suave); }
+.vazio { color: var(--suave); font-size: .9rem; }
+.rodape { text-align: center; color: var(--suave); font-size: .85rem; padding: 8px 16px 32px; }
+
+@media (max-width: 800px) {
+  .colunas { grid-template-columns: 1fr; }
+  .indicadores { grid-template-columns: repeat(2, 1fr); }
+}
