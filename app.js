@@ -16,12 +16,24 @@ let chamados = carregar();
 
 // ---------- armazenamento
 function carregar() {
+  let texto;
   try {
-    return JSON.parse(localStorage.getItem(CHAVE)) || [];
+    texto = localStorage.getItem(CHAVE);
   } catch {
-    // Navegador sem localStorage (modo privado) ou dado corrompido: começa vazio.
+    alert('Este navegador bloqueou o armazenamento local. Os chamados somem ao fechar a página.');
     return [];
   }
+  if (texto == null) return [];
+  try {
+    const lista = JSON.parse(texto);
+    if (Array.isArray(lista)) return lista;
+  } catch {
+    // cai no aviso abaixo
+  }
+  // Dado ilegível: guarda uma cópia antes de começar vazio, para o próximo salvar() não apagar de vez.
+  try { localStorage.setItem(`${CHAVE}-corrompido`, texto); } catch { /* sem espaço: o aviso abaixo continua valendo */ }
+  alert(`Os chamados salvos estavam ilegíveis. Uma cópia ficou em "${CHAVE}-corrompido" no armazenamento do navegador, e a fila começa vazia.`);
+  return [];
 }
 function salvar() {
   try {
@@ -153,9 +165,15 @@ $('prioridade').innerHTML = Object.entries(PRIORIDADES)
 $('form').addEventListener('submit', (e) => {
   e.preventDefault();
   const f = new FormData(e.target);
+  const titulo = f.get('titulo').trim();
+  const solicitante = f.get('solicitante').trim();
+  if (!titulo || !solicitante) {
+    alert('Preencha o resumo e o solicitante.');
+    return;
+  }
   abrir({
-    titulo: f.get('titulo').trim(),
-    solicitante: f.get('solicitante').trim(),
+    titulo,
+    solicitante,
     area: f.get('area'),
     categoria: f.get('categoria'),
     prioridade: f.get('prioridade'),
@@ -174,6 +192,14 @@ $('limpar').addEventListener('click', () => {
   if (confirm('Apagar todos os chamados deste navegador?')) {
     chamados = [];
     salvar();
+    desenhar();
+  }
+});
+
+// Com a página aberta em duas abas, a alteração feita numa aparece na outra (e uma não sobrescreve a outra).
+window.addEventListener('storage', (e) => {
+  if (e.key === CHAVE) {
+    chamados = carregar();
     desenhar();
   }
 });
