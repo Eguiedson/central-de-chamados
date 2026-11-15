@@ -4,6 +4,11 @@ Fila de chamados de TI com prioridade, prazo de SLA e painel de indicadores. Rod
 
 **Abrir:** https://eguiedson.github.io/central-de-chamados/
 
+<picture>
+  <source srcset="docs/print-escuro.png" media="(prefers-color-scheme: dark)">
+  <img src="docs/print-claro.png" alt="Central de Chamados com indicadores, formulário e fila ordenada pelo prazo de SLA">
+</picture>
+
 ## Por que fiz
 
 Por dois anos atendi chamados no ServiceNow e no GLPI. Aqui reconstruí o núcleo desse processo do zero, para entender por dentro o que essas ferramentas fazem: abertura, triagem por prioridade, prazo de atendimento e acompanhamento do SLA.
